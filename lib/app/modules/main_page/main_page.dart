@@ -58,7 +58,7 @@ class MainPage extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10))),
                           onPressed: () {
-                            Modular.to.pushNamed('/home');
+                            Modular.to.navigate('/home');
                           },
                           child: Text("CONHEÇA A LISTA DE RAÇAS")
                         ),
