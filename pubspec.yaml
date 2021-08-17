@@ -1,5 +1,5 @@
 name: thecat_atlas
-description: A new Flutter project.
+description: Project developed in Flutter for the Atlas test
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -20,6 +20,10 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
+scripts:
+  build_runner_compile: flutter pub run build_runner build --delete-conflicting-outputs
+  build_runner_watch: flutter pub run build_runner watch --delete-conflicting-outputs
+
 dependencies:
   flutter:
     sdk: flutter
@@ -31,12 +35,16 @@ dependencies:
   flutter_modular: ^3.3.1
   mobx: ^2.0.4
   flutter_mobx: ^2.0.2
+  flutter_screenutil: ^5.0.0+2
+  flutter_dotenv: ^5.0.2
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_modular_test: ^1.0.1
   flutter_test:
     sdk: flutter
   mobx_codegen: ^2.0.2
+  build_runner: ^2.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -50,9 +58,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - lib/assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
