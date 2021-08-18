@@ -25,30 +25,29 @@ scripts:
   build_runner_watch: flutter pub run build_runner watch --delete-conflicting-outputs
 
 dependencies:
+  bordered_text: ^2.0.0
+  cupertino_icons: ^1.0.2
+  dio: ^4.0.0
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  flutter_modular: ^3.3.1
-  mobx: ^2.0.4
-  flutter_mobx: ^2.0.2
-  flutter_screenutil: ^5.0.0+2
   flutter_dotenv: ^5.0.2
+  flutter_mobx: ^2.0.2
+  flutter_modular: ^3.3.1
+  flutter_screenutil: ^5.0.0+2
   google_fonts: ^2.1.0
+  json_annotation: ^4.0.1
+  mobx: ^2.0.4
 
 dev_dependencies:
+  build_runner: ^2.1.1
   flutter_modular_test: ^1.0.1
   flutter_test:
     sdk: flutter
+  json_serializable: ^4.1.4
   mobx_codegen: ^2.0.2
-  build_runner: ^2.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
 
@@ -60,13 +59,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/assets/images/
-
+    - .env
+    - .env_dev
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

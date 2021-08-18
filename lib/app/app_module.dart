@@ -1,11 +1,16 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:thecat_atlas/app/modules/main_page/main_page.dart';
+import 'package:thecat_atlas/app/repository/cat_repository.dart';
+import 'package:thecat_atlas/app/services/cat_service.dart';
 
 import 'modules/home/home_module.dart';
 
 class AppModule extends Module {
   @override
-  final List<Bind> binds = [];
+  final List<Bind> binds = [
+    Bind((i) => CatRepository()),
+    Bind((i) => CatService(i.get())),
+  ];
 
   @override
   final List<ModularRoute> routes = [

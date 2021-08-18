@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:thecat_atlas/app/shared/theme_utils.dart';
 
 class MainPage extends StatelessWidget {
@@ -12,7 +11,6 @@ class MainPage extends StatelessWidget {
     ThemeUtils.init(context);
 
     return Scaffold(
-        backgroundColor: ThemeUtils.primaryColor,
         body: Container(
           child: Stack(
             children: [
