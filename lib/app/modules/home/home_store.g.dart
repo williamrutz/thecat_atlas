@@ -9,18 +9,18 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeStore on HomeStoreBase, Store {
-  final _$catFutureAtom = Atom(name: 'HomeStoreBase.catFuture');
+  final _$entitiesAtom = Atom(name: 'HomeStoreBase.entities');
 
   @override
-  ObservableFuture<List<CatModel>>? get catFuture {
-    _$catFutureAtom.reportRead();
-    return super.catFuture;
+  ObservableList<CatModel> get entities {
+    _$entitiesAtom.reportRead();
+    return super.entities;
   }
 
   @override
-  set catFuture(ObservableFuture<List<CatModel>>? value) {
-    _$catFutureAtom.reportWrite(value, super.catFuture, () {
-      super.catFuture = value;
+  set entities(ObservableList<CatModel> value) {
+    _$entitiesAtom.reportWrite(value, super.entities, () {
+      super.entities = value;
     });
   }
 
@@ -31,24 +31,24 @@ mixin _$HomeStore on HomeStoreBase, Store {
     return _$initPageAsyncAction.run(() => super.initPage());
   }
 
-  final _$HomeStoreBaseActionController =
-      ActionController(name: 'HomeStoreBase');
+  final _$loadMoreAsyncAction = AsyncAction('HomeStoreBase.loadMore');
 
   @override
-  void searchCats() {
-    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
-        name: 'HomeStoreBase.searchCats');
-    try {
-      return super.searchCats();
-    } finally {
-      _$HomeStoreBaseActionController.endAction(_$actionInfo);
-    }
+  Future<void> loadMore() {
+    return _$loadMoreAsyncAction.run(() => super.loadMore());
+  }
+
+  final _$searchCatsAsyncAction = AsyncAction('HomeStoreBase.searchCats');
+
+  @override
+  Future<dynamic> searchCats() {
+    return _$searchCatsAsyncAction.run(() => super.searchCats());
   }
 
   @override
   String toString() {
     return '''
-catFuture: ${catFuture}
+entities: ${entities}
     ''';
   }
 }

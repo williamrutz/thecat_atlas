@@ -9,14 +9,16 @@ class CatModel {
 
   String id;
   String url;
-  int width;
-  int height;
+  // int width;
+  // int height;
+
+  @JsonKey(name: "breeds")
+  List<BreedModel> breed;
 
   CatModel({
     required this.id,
     required this.url,
-    required this.width,
-    required this.height,
+    required this.breed,
   });
 
   factory CatModel.fromJson(Map<String, dynamic> json) => _$CatModelFromJson(json);
