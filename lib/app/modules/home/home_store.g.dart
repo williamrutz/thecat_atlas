@@ -24,6 +24,21 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: 'HomeStoreBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
   final _$initPageAsyncAction = AsyncAction('HomeStoreBase.initPage');
 
   @override
@@ -48,7 +63,8 @@ mixin _$HomeStore on HomeStoreBase, Store {
   @override
   String toString() {
     return '''
-entities: ${entities}
+entities: ${entities},
+loading: ${loading}
     ''';
   }
 }

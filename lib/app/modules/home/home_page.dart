@@ -76,25 +76,37 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
 
   Widget _buildCatsGrid() {
     return Observer(builder: (_) {
-      return GridView.builder(
-          itemCount: controller.entities.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemBuilder: (context, index) {
-            var count = index;
-            if ((count + 1) >= controller.entities.length) {
-              // controller.searchCats();
-              controller.loadMore();
-            }
+      return (controller.entities.length < 1 && controller.loading)
+          ? _buildLoading()
+          : GridView.builder(
+              itemCount: controller.entities.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              itemBuilder: (context, index) {
+                var count = index;
+                if ((count + 1) == controller.entities.length)
+                  controller.loadMore();
+                  _buildLoading();
 
-            if (controller.entities.length > 0) {
-              final cat = controller.entities[index];
-              return CatItemList(cat);
-            }
+                if (controller.entities.length > 0) {
+                  final cat = controller.entities[index];
+                  return CatItemList(cat);
+                }else{
+                  return const Center(
+                    child: Text('Nenhum gatinho disponivel.', style: TextStyle(color: Colors.white),)
+                  );
+                }
 
-            return const Center(child: CircularProgressIndicator());
-          });
+              });
     });
   }
+}
+
+Widget _buildLoading() {
+  return Center(
+    child: CircularProgressIndicator(
+      color: ThemeUtils.primaryColor,
+    ),
+  );
 }

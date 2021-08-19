@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'auth_interceptor_wrapper.dart';
+
 class CustomDio{
 
   static late CustomDio _simpleInstance;
@@ -19,7 +21,7 @@ class CustomDio{
 
   CustomDio.auth(){
     _dio = Dio(options);
-    // _dio.interceptors.add(AuthInterceptorWrapper());
+    _dio.interceptors.add(AuthInterceptorWrapper());
   }
 
   static Dio get instance {

@@ -1,4 +1,5 @@
 import 'package:bordered_text/bordered_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:thecat_atlas/app/models/cat_model.dart';
@@ -21,7 +22,9 @@ class CatItemList extends StatelessWidget {
         height: 130,
         decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(_cat.url),
+              image: CachedNetworkImageProvider(
+                _cat.url,
+              ),
               fit: BoxFit.cover,
               alignment: Alignment.center,
             ),
@@ -34,9 +37,7 @@ class CatItemList extends StatelessWidget {
               strokeWidth: 4.0,
               strokeColor: Color(0xFF6D4BF8),
               child: Text(
-                (_cat.breed.length > 0)
-                    ? _cat.breed[0].name
-                    : 'NONE ${_cat.id}',
+                (_cat.breed.length > 0) ? _cat.breed[0].name : '',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),

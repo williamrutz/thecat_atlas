@@ -12,6 +12,7 @@ abstract class HomeStoreBase with Store {
   final CatService _catService;
   int _page = 1;
   int _limit = 12;
+  bool isFetchData = false;
 
   HomeStoreBase(
     this._catService,
@@ -20,6 +21,9 @@ abstract class HomeStoreBase with Store {
   @observable
   ObservableList<CatModel> entities = ObservableList.of([]);
 
+  @observable
+  bool loading = false;
+
   @action
   Future<void> initPage() async {
     searchCats();
@@ -27,17 +31,38 @@ abstract class HomeStoreBase with Store {
 
   @action
   Future<void> loadMore() async {
+    if(isFetchData){
+      return;
+    }
+
+    isFetchData = true;
+    loading = true;
+
     var paginate = PaginationModel(page: _page, limit: _limit);
     var data = await _catService.searchCat(paginate);
     data.forEach((element) => entities.add(element));
+
+    loading = false;
+    isFetchData = false;
     _page++;
   }
 
   @action
   Future searchCats() async {
+    if(isFetchData){
+      return;
+    }
+
+    isFetchData = true;
+    loading = true;
+
     var paginate = PaginationModel(page: _page, limit: _limit);
     var data = await _catService.searchCat(paginate);
     entities.addAll(data);
+
+    loading = true;
+    isFetchData = false;
     _page++;
+
   }
 }
