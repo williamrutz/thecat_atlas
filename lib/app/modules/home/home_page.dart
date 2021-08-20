@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:thecat_atlas/app/modules/home/components/cat_item_list.dart';
+import 'package:thecat_atlas/app/shared/custom_drawer.dart';
 import 'package:thecat_atlas/app/shared/theme_utils.dart';
 
 import 'home_store.dart';
@@ -30,9 +31,10 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         extendBodyBehindAppBar: true,
-        endDrawer: Drawer(),
+        endDrawer: CustomDrawer(),
         appBar: appBar,
         body: Stack(children: [
           Container(
@@ -86,10 +88,10 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 ),
                 itemBuilder: (context, index) {
                   var count = index;
-                  if ((count + 1) == controller.entities.length) {
+                  if ((count + 1) == controller.entities.length &&
+                      !controller.isSearchName) {
                     controller.loadMore();
                     return _buildLoading();
-
                   }
 
                   if (controller.entities.length > 0) {
@@ -97,11 +99,13 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                     return CatItemList(cat);
                   } else {
                     return Container(
-                        child: Center(
-                            child: Text(
-                      'Nenhum gatinho disponivel.',
-                      style: TextStyle(color: Colors.white),
-                    )));
+                      child: Center(
+                        child: Text(
+                          'Nenhum gatinho disponivel.',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    );
                   }
                 },
               );

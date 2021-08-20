@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'image_model.dart';
-import 'weight_model.dart';
 
 part 'breed_model.g.dart';
 

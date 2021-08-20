@@ -1,7 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:thecat_atlas/app/models/breed_model.dart';
 
-import 'package:thecat_atlas/app/models/cat_model.dart';
 import 'package:thecat_atlas/app/models/pagination_model.dart';
 import 'package:thecat_atlas/app/services/cat_service.dart';
 
@@ -21,12 +20,16 @@ abstract class HomeStoreBase with Store {
 
   @observable
   ObservableList<BreedModel> entities = ObservableList.of([]);
+  List<BreedModel> breedOriginal = [];
 
   @observable
   bool loading = false;
 
   @observable
   bool finished = false;
+
+  @observable
+  bool isSearchName = false;
 
   @action
   Future<void> initPage() async {
@@ -49,6 +52,8 @@ abstract class HomeStoreBase with Store {
         if (element.image != null) {
           if (element.image?.url != null && element.image?.url != '') {
             entities.add(element);
+            breedOriginal.add(element);
+
           }
         }
       });
@@ -77,6 +82,7 @@ abstract class HomeStoreBase with Store {
         if (element.image != null) {
           if (element.image?.url != null && element.image?.url != '') {
             entities.add(element);
+            breedOriginal.add(element);
           }
         }
       });
@@ -91,30 +97,21 @@ abstract class HomeStoreBase with Store {
 
   @action
   Future<void> searchBreedByName(String name) async {
-    if (isFetchData) {
-      return;
-    }
+    var breeds = breedOriginal;
 
     if (name.trim().length > 0) {
-      isFetchData = true;
+      isSearchName = true;
       loading = true;
 
-      var data = await _catService.searchBreedByName(name.trim().toLowerCase());
-      if (data.length > 0) {
-        entities.clear();
-        data.forEach((element) {
-          if (element.image != null) {
-            if (element.image?.url != null && element.image?.url != '') {
-              entities.add(element);
-            }
-          }
-        });
-      } else {
-        finished = true;
-      }
-
+      entities.clear();
+      breeds = breedOriginal.where((element) => element.name.toLowerCase().contains(name.toLowerCase())).toList();
+      entities.addAll(breeds);
+      
       loading = false;
-      isFetchData = false;
+    }else{
+      entities.clear();
+      entities.addAll(breedOriginal);
+      isSearchName = false;
     }
   }
 }

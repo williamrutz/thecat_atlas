@@ -57,9 +57,6 @@ class AuthInterceptorWrapper extends InterceptorsWrapper {
       return CustomDio.authInstance.request(req.path, options: options, queryParameters: req.queryParameters);
     }
 
-    print("######## RETORNOU DO ERRO ---------------------------");
-
-
     return err;
   }
 

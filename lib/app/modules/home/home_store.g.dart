@@ -54,6 +54,21 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  final _$isSearchNameAtom = Atom(name: 'HomeStoreBase.isSearchName');
+
+  @override
+  bool get isSearchName {
+    _$isSearchNameAtom.reportRead();
+    return super.isSearchName;
+  }
+
+  @override
+  set isSearchName(bool value) {
+    _$isSearchNameAtom.reportWrite(value, super.isSearchName, () {
+      super.isSearchName = value;
+    });
+  }
+
   final _$initPageAsyncAction = AsyncAction('HomeStoreBase.initPage');
 
   @override
@@ -89,7 +104,8 @@ mixin _$HomeStore on HomeStoreBase, Store {
     return '''
 entities: ${entities},
 loading: ${loading},
-finished: ${finished}
+finished: ${finished},
+isSearchName: ${isSearchName}
     ''';
   }
 }

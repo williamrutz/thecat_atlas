@@ -6,6 +6,7 @@ import 'package:thecat_atlas/app/models/breed_model.dart';
 import 'package:thecat_atlas/app/modules/detail/components/skill_item.dart';
 import 'package:thecat_atlas/app/modules/detail/detail_store.dart';
 import 'package:flutter/material.dart';
+import 'package:thecat_atlas/app/shared/custom_drawer.dart';
 import 'package:thecat_atlas/app/shared/theme_utils.dart';
 
 import 'components/cat_photo_item_list.dart';
@@ -42,7 +43,7 @@ class DetailPageState extends ModularState<DetailPage, DetailStore> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      endDrawer: Drawer(),
+      endDrawer: CustomDrawer(),
       appBar: appBar,
       body: Stack(children: [
         Container(
