@@ -26,18 +26,20 @@ scripts:
 
 dependencies:
   bordered_text: ^2.0.0
+  cached_network_image: ^3.1.0
+  connectivity: ^3.0.6
   cupertino_icons: ^1.0.2
   dio: ^4.0.0
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2
-  mobx: ^2.0.4
   flutter_mobx: ^2.0.2
   flutter_modular: ^3.3.1
   flutter_screenutil: ^5.0.0+2
   google_fonts: ^2.1.0
   json_annotation: ^4.0.1
-  cached_network_image: ^3.1.0
+  mobx: ^2.0.4
+  synchronized: ^3.0.0
 
 dev_dependencies:
   build_runner: ^2.1.1

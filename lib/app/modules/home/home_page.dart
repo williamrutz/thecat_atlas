@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:thecat_atlas/app/models/cat_model.dart';
 import 'package:thecat_atlas/app/modules/home/components/cat_item_list.dart';
 import 'package:thecat_atlas/app/shared/theme_utils.dart';
 
@@ -51,6 +50,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextFormField(
+                    onChanged: (name) => controller.searchBreedByName(name),
                     style: GoogleFonts.montserrat(),
                     cursorColor: Colors.grey,
                     decoration: InputDecoration(
@@ -75,31 +75,38 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
   }
 
   Widget _buildCatsGrid() {
-    return Observer(builder: (_) {
-      return (controller.entities.length < 1 && controller.loading)
-          ? _buildLoading()
-          : GridView.builder(
-              itemCount: controller.entities.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (context, index) {
-                var count = index;
-                if ((count + 1) == controller.entities.length)
-                  controller.loadMore();
-                  _buildLoading();
+    return Observer(
+      builder: (_) {
+        return (controller.entities.length < 1 && controller.loading)
+            ? _buildLoading()
+            : GridView.builder(
+                itemCount: controller.entities.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                itemBuilder: (context, index) {
+                  var count = index;
+                  if ((count + 1) == controller.entities.length) {
+                    controller.loadMore();
+                    return _buildLoading();
 
-                if (controller.entities.length > 0) {
-                  final cat = controller.entities[index];
-                  return CatItemList(cat);
-                }else{
-                  return const Center(
-                    child: Text('Nenhum gatinho disponivel.', style: TextStyle(color: Colors.white),)
-                  );
-                }
+                  }
 
-              });
-    });
+                  if (controller.entities.length > 0) {
+                    final cat = controller.entities[index];
+                    return CatItemList(cat);
+                  } else {
+                    return Container(
+                        child: Center(
+                            child: Text(
+                      'Nenhum gatinho disponivel.',
+                      style: TextStyle(color: Colors.white),
+                    )));
+                  }
+                },
+              );
+      },
+    );
   }
 }
 

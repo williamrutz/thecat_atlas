@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_store.dart';
+part of 'detail_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,23 +8,38 @@ part of 'home_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$HomeStore on HomeStoreBase, Store {
-  final _$entitiesAtom = Atom(name: 'HomeStoreBase.entities');
+mixin _$DetailStore on _DetailStoreBase, Store {
+  final _$entitiesAtom = Atom(name: '_DetailStoreBase.entities');
 
   @override
-  ObservableList<BreedModel> get entities {
+  ObservableList<CatModel> get entities {
     _$entitiesAtom.reportRead();
     return super.entities;
   }
 
   @override
-  set entities(ObservableList<BreedModel> value) {
+  set entities(ObservableList<CatModel> value) {
     _$entitiesAtom.reportWrite(value, super.entities, () {
       super.entities = value;
     });
   }
 
-  final _$loadingAtom = Atom(name: 'HomeStoreBase.loading');
+  final _$idAtom = Atom(name: '_DetailStoreBase.id');
+
+  @override
+  String get id {
+    _$idAtom.reportRead();
+    return super.id;
+  }
+
+  @override
+  set id(String value) {
+    _$idAtom.reportWrite(value, super.id, () {
+      super.id = value;
+    });
+  }
+
+  final _$loadingAtom = Atom(name: '_DetailStoreBase.loading');
 
   @override
   bool get loading {
@@ -39,7 +54,7 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
-  final _$finishedAtom = Atom(name: 'HomeStoreBase.finished');
+  final _$finishedAtom = Atom(name: '_DetailStoreBase.finished');
 
   @override
   bool get finished {
@@ -54,40 +69,26 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
-  final _$initPageAsyncAction = AsyncAction('HomeStoreBase.initPage');
+  final _$initPageAsyncAction = AsyncAction('_DetailStoreBase.initPage');
 
   @override
   Future<void> initPage() {
     return _$initPageAsyncAction.run(() => super.initPage());
   }
 
-  final _$loadMoreAsyncAction = AsyncAction('HomeStoreBase.loadMore');
+  final _$searchMorePhotoAsyncAction =
+      AsyncAction('_DetailStoreBase.searchMorePhoto');
 
   @override
-  Future<void> loadMore() {
-    return _$loadMoreAsyncAction.run(() => super.loadMore());
-  }
-
-  final _$searchBreedAsyncAction = AsyncAction('HomeStoreBase.searchBreed');
-
-  @override
-  Future<void> searchBreed() {
-    return _$searchBreedAsyncAction.run(() => super.searchBreed());
-  }
-
-  final _$searchBreedByNameAsyncAction =
-      AsyncAction('HomeStoreBase.searchBreedByName');
-
-  @override
-  Future<void> searchBreedByName(String name) {
-    return _$searchBreedByNameAsyncAction
-        .run(() => super.searchBreedByName(name));
+  Future<void> searchMorePhoto() {
+    return _$searchMorePhotoAsyncAction.run(() => super.searchMorePhoto());
   }
 
   @override
   String toString() {
     return '''
 entities: ${entities},
+id: ${id},
 loading: ${loading},
 finished: ${finished}
     ''';
