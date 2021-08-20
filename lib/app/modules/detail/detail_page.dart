@@ -61,23 +61,39 @@ class DetailPageState extends ModularState<DetailPage, DetailStore> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  width: double.infinity,
-                  height: 200,
-                  margin: EdgeInsets.only(top: 50, left: 50, right: 50),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: CachedNetworkImageProvider(
-                        model.image!.url!,
+                Stack(
+                  children: [
+                    Positioned(
+                      top: appBar.preferredSize.height + 5,
+                      left: 30,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          width: 120,
+                          height: 200,
+                          color: ThemeUtils.primaryColor,
+                        ),
                       ),
-                      fit: BoxFit.cover,
-                      alignment: Alignment.center,
                     ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 150,
+                      height: 200,
+                      margin: EdgeInsets.only(top: 10, left: 50, right: 50, bottom: 20),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: CachedNetworkImageProvider(
+                            model.image!.url!,
+                          ),
+                          fit: BoxFit.cover,
+                          alignment: Alignment.center,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 10,
                 ),
                 Text(
                   model.name,

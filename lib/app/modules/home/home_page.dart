@@ -31,49 +31,50 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        extendBodyBehindAppBar: true,
-        endDrawer: CustomDrawer(),
-        appBar: appBar,
-        body: Stack(children: [
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('lib/assets/images/background.png'),
-                    fit: BoxFit.cover)),
+      extendBodyBehindAppBar: true,
+      endDrawer: CustomDrawer(),
+      appBar: appBar,
+      body: Stack(children: [
+        Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('lib/assets/images/background.png'),
+                  fit: BoxFit.cover)),
+        ),
+        Container(
+          margin: EdgeInsets.only(
+              top:
+                  (appBar.preferredSize.height + ScreenUtil().statusBarHeight)),
+          padding: EdgeInsets.only(left: 8.0, right: 8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextFormField(
+                onChanged: (name) => controller.searchBreedByName(name),
+                style: GoogleFonts.montserrat(),
+                cursorColor: Colors.grey,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(8.0),
+                    fillColor: Colors.white,
+                    filled: true,
+                    prefixIcon: Icon(Icons.search, color: Colors.grey),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: Colors.grey)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: Colors.grey)),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: Colors.grey))),
+              ),
+              Expanded(child: _buildCatsGrid()),
+            ],
           ),
-          Container(
-              margin: EdgeInsets.only(
-                  top: (appBar.preferredSize.height +
-                      ScreenUtil().statusBarHeight)),
-              padding: EdgeInsets.only(left: 8.0, right: 8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextFormField(
-                    onChanged: (name) => controller.searchBreedByName(name),
-                    style: GoogleFonts.montserrat(),
-                    cursorColor: Colors.grey,
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(8.0),
-                        fillColor: Colors.white,
-                        filled: true,
-                        prefixIcon: Icon(Icons.search, color: Colors.grey),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(color: Colors.grey)),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(color: Colors.grey)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(color: Colors.grey))),
-                  ),
-                  Expanded(child: _buildCatsGrid()),
-                ],
-              ))
-        ]));
+        )
+      ]),
+    );
   }
 
   Widget _buildCatsGrid() {
